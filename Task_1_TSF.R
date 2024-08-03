@@ -8,12 +8,12 @@ study_hours <- content(response, 'text')
 std_hrs <- read.csv(text = study_hours)
 
 #Simple Linear Regression
-#scores as dependent variable
-#no. of study hours as independent variable
+#scores as dependent variable (y-axis)
+#no. of study hours as independent variable (x-axis)
 regr <- lm(formula = Scores ~ Hours, data = std_hrs)
 summary(regr)
 
-#to prove that the given data follows a normal distribution
+#to assess the normality of the residuals
 resid(regr)
 plot(resid(regr))
 plot(density(resid(regr)))
@@ -26,3 +26,8 @@ qqline(resid(regr))
 new_score <- data.frame(Hours = 9.25)
 pred_score <- predict(regr, new_score)
 print(pred_score)
+
+#to evaluate the model
+plot(regr)
+mse <- mean(residuals(regr)^2)
+rmse <- sqrt(mse)
