@@ -4,8 +4,6 @@ library(cluster)
 
 
 #Load and explore the data set
-setwd("C:\\Users\\Tajasa\\OneDrive\\Documents\\Econometrics")
-getwd()
 iris <- read.csv("Iris.csv")
 head(iris)
 summary(iris)
