@@ -50,9 +50,15 @@ km_result$cluster
 iris_cluster <- iris
 iris_cluster$Cluster <- as.factor(km_result$cluster)
 
+#Creating centers for the 3 clusters
+centroids <- as.data.frame (km_result$centers)
+centroids$Cluster <- as.factor(1:nrow(centroids))
+
+
 #Visualizing the clusters
 ggplot(iris_cluster, aes(PetalLengthCm, PetalWidthCm, color = Cluster)) +
   geom_point(size = 3) +
+  geom_point(data = centroids, aes(PetalLengthCm, PetalWidthCm), color = 'purple', size = 5, shape = 4, stroke = 2) +
   labs (title = "K-means Clustering with 3 Clusters", 
         x = "Petal Length", 
         y = "Petal Width")
@@ -61,6 +67,7 @@ ggplot(iris_cluster, aes(PetalLengthCm, PetalWidthCm, color = Cluster)) +
 #Validating clusters with True Labels
 ggplot(iris_cluster, aes(PetalLengthCm, PetalWidthCm, color = Species)) +
   geom_point (size = 3) +
+  geom_point(data = centroids, aes(PetalLengthCm, PetalWidthCm), color = 'yellow', size = 5, shape = 4, stroke = 2) +
   labs(title = "Iris Species Distribution", 
        x = "Petal Length (in cm)", 
        y = "Petal Width")
